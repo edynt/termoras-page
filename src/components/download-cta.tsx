@@ -35,7 +35,7 @@ export function DownloadCta() {
             </p>
 
             <a
-              href="./Termoras_0.1.0_x64.dmg"
+              href="./Termoras_0.1.0_universal.dmg"
               download
               className="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-xl bg-gradient-to-br from-brand-blue to-brand-green text-[#0a0b0f] text-base font-bold transition-all duration-200 hover:-translate-y-0.5 btn-press"
               style={{ boxShadow: '0 4px 24px rgba(107,161,241,0.3), 0 1px 3px rgba(0,0,0,0.1)' }}
@@ -50,7 +50,7 @@ export function DownloadCta() {
             >
               <span className="flex items-center gap-1.5">
                 <Shield size={14} />
-                macOS Intel (x64)
+                macOS Universal
               </span>
               <span className="flex items-center gap-1.5">
                 <HardDrive size={14} />

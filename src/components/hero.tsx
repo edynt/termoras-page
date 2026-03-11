@@ -28,7 +28,7 @@ export function Hero() {
           }}
         >
           <span className="w-2 h-2 rounded-full bg-brand-green animate-pulse-dot" />
-          v0.1.0 — Now available for macOS
+          v0.1.0 — Now available for macOS (Universal)
         </div>
 
         {/* Heading */}
@@ -50,7 +50,7 @@ export function Hero() {
         {/* CTA */}
         <div className="fade-up flex gap-3.5 justify-center flex-wrap max-md:flex-col max-md:items-center">
           <a
-            href="./Termoras_0.1.0_x64.dmg"
+            href="./Termoras_0.1.0_universal.dmg"
             download
             className="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-xl bg-gradient-to-br from-brand-blue to-brand-green text-[#0a0b0f] text-base font-bold transition-all duration-200 hover:-translate-y-0.5 btn-press"
             style={{ boxShadow: '0 4px 24px rgba(107,161,241,0.3), 0 1px 3px rgba(0,0,0,0.1)' }}
@@ -62,8 +62,8 @@ export function Hero() {
 
         {/* Meta */}
         <p className="fade-up mt-5 text-[13px]" style={{ color: 'var(--text-tertiary)' }}>
-          macOS Intel (x64) &middot;{' '}
-          <span style={{ color: 'var(--text-secondary)' }}>Termoras_0.1.0_x64.dmg</span> &middot;
+          macOS Universal (Intel + Apple Silicon) &middot;{' '}
+          <span style={{ color: 'var(--text-secondary)' }}>Termoras_0.1.0_universal.dmg</span> &middot;
           Free &amp; open source
         </p>
 
