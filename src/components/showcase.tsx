@@ -1,36 +1,53 @@
 export function Showcase() {
   return (
-    <section className="py-20 pb-28" id="showcase">
-      <div className="max-w-[1120px] mx-auto px-6">
-        <p className="fade-up text-center text-[13px] font-semibold uppercase tracking-[2px] text-brand-blue mb-4">
+    <section className="py-20 pb-28 relative" id="showcase">
+      <div className="section-separator" />
+
+      <div className="max-w-[1120px] mx-auto px-6 pt-20">
+        <p className="fade-up text-center text-[13px] font-semibold uppercase tracking-[3px] text-brand-blue mb-4">
           Showcase
         </p>
-        <h2 className="fade-up text-center text-[clamp(28px,4vw,42px)] font-extrabold tracking-tight mb-4">
+        <h2 className="fade-up text-center text-[clamp(28px,4vw,44px)] font-extrabold tracking-tight mb-4">
           Built for your <span className="gradient-text">daily workflow</span>
         </h2>
-        <p className="fade-up text-center text-base max-w-[480px] mx-auto mb-16" style={{ color: 'var(--text-secondary)' }}>
+        <p
+          className="fade-up text-center text-base max-w-[480px] mx-auto mb-16"
+          style={{ color: 'var(--text-secondary)' }}
+        >
           From terminal to task management to version control — all in one window.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {/* Kanban Card */}
           <div
-            className="fade-up rounded-2xl overflow-hidden transition-all duration-300"
-            style={{ border: '1px solid var(--border-primary)', background: 'var(--bg-card)' }}
+            className="fade-up stagger-1 glow-card rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-card-hover)] group"
+            style={{
+              border: '1px solid var(--border-primary)',
+              background: 'var(--bg-card)',
+              backdropFilter: 'blur(12px)',
+            }}
           >
             <div
-              className="p-6 flex items-center justify-center"
-              style={{
-                aspectRatio: '16/10',
-                background:
-                  'linear-gradient(145deg, rgba(167,139,250,0.05), rgba(107,161,241,0.05))',
-              }}
+              className="relative p-6 flex items-center justify-center overflow-hidden"
+              style={{ aspectRatio: '16/10' }}
             >
-              <MiniKanban />
+              {/* Ambient glow */}
+              <div
+                className="absolute inset-0 opacity-60 group-hover:opacity-100 transition-opacity duration-500"
+                style={{
+                  background: 'linear-gradient(145deg, rgba(167,139,250,0.06), rgba(107,161,241,0.06))',
+                }}
+              />
+              <div className="relative w-full">
+                <MiniKanban />
+              </div>
             </div>
-            <div className="px-6 pb-6 pt-5">
+            <div
+              className="px-6 pb-6 pt-5"
+              style={{ borderTop: '1px solid var(--border-secondary)' }}
+            >
               <h3 className="text-base font-bold mb-1.5">Kanban Board</h3>
-              <p className="text-[13px]" style={{ color: 'var(--text-secondary)' }}>
+              <p className="text-[13px] leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                 Drag-and-drop task management with custom tags and colors. Plan, track, and ship
                 features.
               </p>
@@ -39,22 +56,33 @@ export function Showcase() {
 
           {/* Diff Card */}
           <div
-            className="fade-up rounded-2xl overflow-hidden transition-all duration-300"
-            style={{ border: '1px solid var(--border-primary)', background: 'var(--bg-card)' }}
+            className="fade-up stagger-2 glow-card rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-card-hover)] group"
+            style={{
+              border: '1px solid var(--border-primary)',
+              background: 'var(--bg-card)',
+              backdropFilter: 'blur(12px)',
+            }}
           >
             <div
-              className="p-6 flex items-center justify-center"
-              style={{
-                aspectRatio: '16/10',
-                background:
-                  'linear-gradient(145deg, rgba(240,111,111,0.05), rgba(94,196,168,0.05))',
-              }}
+              className="relative p-6 flex items-center justify-center overflow-hidden"
+              style={{ aspectRatio: '16/10' }}
             >
-              <MiniDiff />
+              <div
+                className="absolute inset-0 opacity-60 group-hover:opacity-100 transition-opacity duration-500"
+                style={{
+                  background: 'linear-gradient(145deg, rgba(240,111,111,0.06), rgba(94,196,168,0.06))',
+                }}
+              />
+              <div className="relative w-full">
+                <MiniDiff />
+              </div>
             </div>
-            <div className="px-6 pb-6 pt-5">
-              <h3 className="text-base font-bold mb-1.5">GitHub-style Diff Viewer</h3>
-              <p className="text-[13px]" style={{ color: 'var(--text-secondary)' }}>
+            <div
+              className="px-6 pb-6 pt-5"
+              style={{ borderTop: '1px solid var(--border-secondary)' }}
+            >
+              <h3 className="text-base font-bold mb-1.5">Diff Viewer</h3>
+              <p className="text-[13px] leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                 Review changes with line numbers, color-coded additions and deletions. Stage,
                 commit, and push in one click.
               </p>
@@ -96,12 +124,12 @@ function KanbanColumn({
   return (
     <div className="flex-1 rounded-lg p-2.5" style={{ background: 'rgba(255,255,255,0.03)' }}>
       <div
-        className="text-[10px] font-bold uppercase tracking-wider mb-2 pb-1.5"
-        style={{ color: titleColor, borderBottom: '1px solid rgba(255,255,255,0.05)' }}
+        className="text-[10px] font-bold uppercase tracking-wider mb-2.5 pb-1.5"
+        style={{ color: titleColor, borderBottom: '1px solid rgba(255,255,255,0.06)' }}
       >
         {title}
       </div>
-      {children}
+      <div className="flex flex-col gap-1.5">{children}</div>
     </div>
   )
 }
@@ -119,14 +147,14 @@ function KanbanCard({
 }) {
   return (
     <div
-      className="p-1.5 px-2 rounded-md text-[10px] text-[#7a7e8a] mb-1.5"
+      className="p-2 px-2.5 rounded-md text-[10px] text-[#7a7e8a]"
       style={{
         background: 'rgba(255,255,255,0.04)',
         border: '1px solid rgba(255,255,255,0.05)',
       }}
     >
       <span
-        className="inline-block px-1.5 py-px rounded text-[8px] font-semibold mb-0.5"
+        className="inline-block px-1.5 py-px rounded text-[8px] font-semibold mb-1"
         style={{ background: tagColor, color: tagText }}
       >
         {tag}
@@ -140,8 +168,8 @@ function KanbanCard({
 function MiniDiff() {
   return (
     <div
-      className="w-full font-mono text-[10px] leading-[1.8] rounded-lg p-3 overflow-hidden"
-      style={{ background: 'rgba(0,0,0,0.2)' }}
+      className="w-full font-mono text-[10px] leading-[1.9] rounded-lg p-3.5 overflow-hidden"
+      style={{ background: 'rgba(0,0,0,0.25)', border: '1px solid rgba(255,255,255,0.04)' }}
     >
       <div className="text-[#79c0ff]">@@ -12,6 +12,8 @@</div>
       <div className="text-[#52555e]">
@@ -150,15 +178,19 @@ function MiniDiff() {
       <div className="text-[#52555e]">
         &nbsp; import {'{'} GitBranch {'}'} from &quot;lucide-react&quot;;
       </div>
-      <div className="text-[#3fb950]">
+      <div className="text-[#3fb950] bg-[rgba(63,185,80,0.06)] -mx-1 px-1 rounded-sm">
         + import {'{'} Check {'}'} from &quot;lucide-react&quot;;
       </div>
-      <div className="text-[#3fb950]">
+      <div className="text-[#3fb950] bg-[rgba(63,185,80,0.06)] -mx-1 px-1 rounded-sm">
         + import {'{'} toast {'}'} from &quot;../lib/toast&quot;;
       </div>
       <div className="text-[#52555e]">&nbsp;</div>
-      <div className="text-[#f85149]">- const msg = &quot;initial commit&quot;;</div>
-      <div className="text-[#3fb950]">+ const msg = commitInput.trim();</div>
+      <div className="text-[#f85149] bg-[rgba(248,81,73,0.06)] -mx-1 px-1 rounded-sm">
+        - const msg = &quot;initial commit&quot;;
+      </div>
+      <div className="text-[#3fb950] bg-[rgba(63,185,80,0.06)] -mx-1 px-1 rounded-sm">
+        + const msg = commitInput.trim();
+      </div>
       <div className="text-[#52555e]">&nbsp; await gitCommit(path, msg);</div>
     </div>
   )

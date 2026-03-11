@@ -1,56 +1,70 @@
+import { useState, useEffect } from 'react'
 import { ThemeToggle } from './theme-toggle'
 
 export function Navbar() {
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
   return (
     <nav
-      className="fixed top-0 left-0 right-0 z-50 py-4 backdrop-blur-xl transition-colors duration-300"
+      className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
       style={{
         background: 'var(--bg-navbar)',
-        borderBottom: '1px solid var(--border-secondary)',
+        backdropFilter: 'blur(20px) saturate(1.4)',
+        WebkitBackdropFilter: 'blur(20px) saturate(1.4)',
+        borderBottom: scrolled ? '1px solid var(--border-primary)' : '1px solid transparent',
+        boxShadow: scrolled ? '0 1px 12px rgba(0,0,0,0.04)' : 'none',
+        padding: scrolled ? '12px 0' : '16px 0',
       }}
     >
       <div className="max-w-[1120px] mx-auto px-6 flex items-center justify-between">
-        <a href="#" className="flex items-center gap-2.5 text-xl font-extrabold tracking-tight">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-blue to-brand-green flex items-center justify-center text-sm font-extrabold text-[#0a0b0f]">
-            T
-          </div>
-          <span style={{ color: 'var(--text-primary)' }}>Termoras</span>
+        <a href="#" className="flex items-center gap-2.5 text-lg font-bold tracking-tight group">
+          <img
+            src="/icons/128x128.png"
+            alt="Termoras"
+            width={32}
+            height={32}
+            className="w-8 h-8 rounded-lg transition-transform duration-200 group-hover:scale-105"
+          />
+          <span
+            className="transition-colors duration-200"
+            style={{ color: 'var(--text-primary)' }}
+          >
+            Termoras
+          </span>
         </a>
 
-        <div className="hidden md:flex items-center gap-8">
-          <a
-            href="#features"
-            className="text-sm font-medium transition-colors duration-200 hover:opacity-100"
-            style={{ color: 'var(--text-secondary)' }}
-          >
-            Features
-          </a>
-          <a
-            href="#showcase"
-            className="text-sm font-medium transition-colors duration-200 hover:opacity-100"
-            style={{ color: 'var(--text-secondary)' }}
-          >
-            Showcase
-          </a>
-          <a
-            href="#tech"
-            className="text-sm font-medium transition-colors duration-200 hover:opacity-100"
-            style={{ color: 'var(--text-secondary)' }}
-          >
-            Tech
-          </a>
+        <div className="hidden md:flex items-center gap-1">
+          {['Features', 'Showcase', 'Tech'].map((item) => (
+            <a
+              key={item}
+              href={`#${item.toLowerCase()}`}
+              className="px-3.5 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-[var(--bg-tertiary)]"
+              style={{ color: 'var(--text-secondary)' }}
+            >
+              {item}
+            </a>
+          ))}
+
+          <div className="w-px h-5 mx-2" style={{ background: 'var(--border-primary)' }} />
 
           <ThemeToggle />
 
           <a
             href="#download"
-            className="px-5 py-2 rounded-lg text-[13px] font-semibold bg-gradient-to-br from-brand-blue to-brand-green text-[#0a0b0f] transition-all duration-200 hover:opacity-90 hover:-translate-y-0.5"
+            className="ml-2 px-5 py-2 rounded-lg text-[13px] font-semibold bg-gradient-to-br from-brand-blue to-brand-green text-[#0a0b0f] transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 btn-press"
+            style={{ boxShadow: '0 2px 12px rgba(107,161,241,0.2)' }}
           >
             Download
           </a>
         </div>
 
-        {/* Mobile: theme toggle only */}
+        {/* Mobile */}
         <div className="flex md:hidden items-center gap-3">
           <ThemeToggle />
         </div>

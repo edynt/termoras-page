@@ -1,12 +1,16 @@
 export function Footer() {
   return (
-    <footer
-      className="py-8 text-center"
-      style={{ borderTop: '1px solid var(--border-secondary)' }}
-    >
+    <footer className="py-10 text-center">
+      <div className="section-separator mb-10" />
       <div className="max-w-[1120px] mx-auto px-6">
-        <p className="text-[13px]" style={{ color: 'var(--text-tertiary)' }}>
-          Termoras &copy; 2026. Built with Tauri + React + Rust.
+        <div className="flex items-center justify-center gap-2.5 mb-3">
+          <img src="/icons/128x128.png" alt="Termoras" width={20} height={20} className="w-5 h-5 rounded opacity-50" />
+          <span className="text-sm font-semibold" style={{ color: 'var(--text-tertiary)' }}>
+            Termoras
+          </span>
+        </div>
+        <p className="text-[13px]" style={{ color: 'var(--text-muted)' }}>
+          &copy; 2026 Termoras. Built with Tauri + React + Rust.
         </p>
       </div>
     </footer>
