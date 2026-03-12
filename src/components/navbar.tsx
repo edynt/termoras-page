@@ -67,6 +67,13 @@ export function Navbar() {
         {/* Mobile */}
         <div className="flex md:hidden items-center gap-3">
           <ThemeToggle />
+          <a
+            href="#download"
+            className="px-4 py-2 rounded-lg text-[13px] font-semibold bg-gradient-to-br from-brand-blue to-brand-green text-[#0a0b0f] transition-all duration-200 btn-press"
+            style={{ boxShadow: '0 2px 12px rgba(107,161,241,0.2)' }}
+          >
+            Download
+          </a>
         </div>
       </div>
     </nav>

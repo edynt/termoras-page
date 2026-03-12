@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react'
+
 export function Showcase() {
   return (
     <section className="py-20 pb-28 relative" id="showcase">
@@ -48,8 +50,7 @@ export function Showcase() {
             >
               <h3 className="text-base font-bold mb-1.5">Kanban Board</h3>
               <p className="text-[13px] leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                Drag-and-drop task management with custom tags and colors. Plan, track, and ship
-                features.
+                Drag-and-drop task management with custom tags, auto-run commands, and one-click execution. Plan and ship features alongside your terminal.
               </p>
             </div>
           </div>
@@ -83,8 +84,7 @@ export function Showcase() {
             >
               <h3 className="text-base font-bold mb-1.5">Diff Viewer</h3>
               <p className="text-[13px] leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                Review changes with line numbers, color-coded additions and deletions. Stage,
-                commit, and push in one click.
+                Review file changes with syntax highlighting, line numbers, and split or unified view modes. Stage, commit, and push without leaving the app.
               </p>
             </div>
           </div>
@@ -119,13 +119,13 @@ function KanbanColumn({
 }: {
   title: string
   titleColor: string
-  children: React.ReactNode
+  children: ReactNode
 }) {
   return (
-    <div className="flex-1 rounded-lg p-2.5" style={{ background: 'rgba(255,255,255,0.03)' }}>
+    <div className="flex-1 rounded-lg p-2.5" style={{ background: 'var(--bg-secondary)' }}>
       <div
         className="text-[10px] font-bold uppercase tracking-wider mb-2.5 pb-1.5"
-        style={{ color: titleColor, borderBottom: '1px solid rgba(255,255,255,0.06)' }}
+        style={{ color: titleColor, borderBottom: '1px solid var(--border-primary)' }}
       >
         {title}
       </div>
@@ -147,10 +147,11 @@ function KanbanCard({
 }) {
   return (
     <div
-      className="p-2 px-2.5 rounded-md text-[10px] text-[#7a7e8a]"
+      className="p-2 px-2.5 rounded-md text-[10px]"
       style={{
-        background: 'rgba(255,255,255,0.04)',
-        border: '1px solid rgba(255,255,255,0.05)',
+        background: 'var(--bg-tertiary)',
+        border: '1px solid var(--border-secondary)',
+        color: 'var(--text-secondary)',
       }}
     >
       <span
@@ -169,13 +170,13 @@ function MiniDiff() {
   return (
     <div
       className="w-full font-mono text-[10px] leading-[1.9] rounded-lg p-3.5 overflow-hidden"
-      style={{ background: 'rgba(0,0,0,0.25)', border: '1px solid rgba(255,255,255,0.04)' }}
+      style={{ background: 'var(--bg-secondary)', border: '1px solid var(--border-primary)' }}
     >
       <div className="text-[#79c0ff]">@@ -12,6 +12,8 @@</div>
-      <div className="text-[#52555e]">
+      <div className="font-mono" style={{ color: 'var(--text-tertiary)' }}>
         &nbsp; import {'{'} useAppStore {'}'} from &quot;../stores&quot;;
       </div>
-      <div className="text-[#52555e]">
+      <div className="font-mono" style={{ color: 'var(--text-tertiary)' }}>
         &nbsp; import {'{'} GitBranch {'}'} from &quot;lucide-react&quot;;
       </div>
       <div className="text-[#3fb950] bg-[rgba(63,185,80,0.06)] -mx-1 px-1 rounded-sm">
@@ -184,14 +185,14 @@ function MiniDiff() {
       <div className="text-[#3fb950] bg-[rgba(63,185,80,0.06)] -mx-1 px-1 rounded-sm">
         + import {'{'} toast {'}'} from &quot;../lib/toast&quot;;
       </div>
-      <div className="text-[#52555e]">&nbsp;</div>
+      <div className="font-mono" style={{ color: 'var(--text-tertiary)' }}>&nbsp;</div>
       <div className="text-[#f85149] bg-[rgba(248,81,73,0.06)] -mx-1 px-1 rounded-sm">
         - const msg = &quot;initial commit&quot;;
       </div>
       <div className="text-[#3fb950] bg-[rgba(63,185,80,0.06)] -mx-1 px-1 rounded-sm">
         + const msg = commitInput.trim();
       </div>
-      <div className="text-[#52555e]">&nbsp; await gitCommit(path, msg);</div>
+      <div className="font-mono" style={{ color: 'var(--text-tertiary)' }}>&nbsp; await gitCommit(path, msg);</div>
     </div>
   )
 }

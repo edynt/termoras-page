@@ -25,7 +25,7 @@ const features: {
     glowColor: 'rgba(167,139,250,0.06)',
     title: 'Built-in Kanban Board',
     description:
-      'Plan your tasks right next to your terminals. Drag-and-drop cards between columns — no context switching needed.',
+      'Plan tasks right next to your code. Drag-and-drop cards, assign tags, and auto-run terminal commands from cards — no context switching.',
   },
   {
     icon: <GitBranch size={20} />,
@@ -34,7 +34,7 @@ const features: {
     glowColor: 'rgba(240,111,111,0.06)',
     title: 'Git Integration',
     description:
-      'View changed files, stage, commit, and push — all from a diff viewer with line numbers and syntax colors.',
+      'Stage, commit, and push from a built-in diff viewer. Split or unified view with syntax highlighting and line numbers.',
   },
   {
     icon: <Zap size={20} />,
@@ -43,7 +43,7 @@ const features: {
     glowColor: 'rgba(94,196,168,0.06)',
     title: 'Blazing Fast',
     description:
-      'Built with Tauri + Rust backend. Native performance with minimal memory footprint — 10x lighter than Electron alternatives.',
+      'Built with Tauri + Rust backend. Native performance with minimal memory footprint — starts instantly, uses less than 100MB RAM.',
   },
   {
     icon: <SunMoon size={20} />,
@@ -88,7 +88,7 @@ export function Features() {
           {features.map((f, i) => (
             <div
               key={f.title}
-              className={`fade-up stagger-${i + 1} glow-card p-7 rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-card-hover)] group`}
+              className={`fade-up stagger-${Math.min(i + 1, 6)} glow-card p-7 rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-card-hover)] group`}
               style={{
                 background: 'var(--bg-card)',
                 border: '1px solid var(--border-primary)',

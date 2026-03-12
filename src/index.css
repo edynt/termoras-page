@@ -212,3 +212,20 @@ body::before {
 .btn-press:active {
   transform: scale(0.98) !important;
 }
+
+/* Accessibility: reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  .animate-float,
+  .animate-float-delayed,
+  .animate-float-slow,
+  .animate-shimmer,
+  .animate-blink,
+  .animate-pulse-dot {
+    animation: none;
+  }
+  .fade-up {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

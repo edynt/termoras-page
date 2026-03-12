@@ -1,4 +1,6 @@
-import { Download, Shield, HardDrive, Activity } from 'lucide-react'
+import { Download, HardDrive, Activity } from 'lucide-react'
+
+const DOWNLOAD_BASE = 'https://github.com/edynt/termoras-page/releases/download/v0.1.0'
 
 export function DownloadCta() {
   return (
@@ -34,31 +36,42 @@ export function DownloadCta() {
               Download Termoras for free and get started in seconds.
             </p>
 
-            <a
-              href="./Termoras_0.1.0_universal.dmg"
-              download
-              className="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-xl bg-gradient-to-br from-brand-blue to-brand-green text-[#0a0b0f] text-base font-bold transition-all duration-200 hover:-translate-y-0.5 btn-press"
-              style={{ boxShadow: '0 4px 24px rgba(107,161,241,0.3), 0 1px 3px rgba(0,0,0,0.1)' }}
-            >
-              <Download size={18} />
-              Download Termoras v0.1.0
-            </a>
+            <div className="flex gap-3 justify-center flex-wrap max-md:flex-col max-md:items-center">
+              <a
+                href={`${DOWNLOAD_BASE}/Termoras_0.1.0_aarch64.dmg`}
+                className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl bg-gradient-to-br from-brand-blue to-brand-green text-[#0a0b0f] text-[15px] font-semibold transition-all duration-200 hover:-translate-y-0.5 btn-press"
+                style={{ boxShadow: '0 4px 24px rgba(107,161,241,0.3), 0 1px 3px rgba(0,0,0,0.1)' }}
+              >
+                <Download size={17} />
+                macOS Apple Silicon
+              </a>
+              <a
+                href={`${DOWNLOAD_BASE}/Termoras_0.1.0_x64.dmg`}
+                className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl text-[15px] font-semibold transition-all duration-200 hover:-translate-y-0.5 btn-press"
+                style={{
+                  background: 'var(--bg-card)',
+                  border: '1px solid var(--border-primary)',
+                  color: 'var(--text-primary)',
+                  boxShadow: 'var(--shadow-card)',
+                  backdropFilter: 'blur(12px)',
+                }}
+              >
+                <Download size={17} style={{ opacity: 0.5 }} />
+                macOS Intel
+              </a>
+            </div>
 
             <div
               className="flex gap-6 justify-center mt-6 text-[13px] flex-wrap"
               style={{ color: 'var(--text-tertiary)' }}
             >
               <span className="flex items-center gap-1.5">
-                <Shield size={14} />
-                macOS Universal
-              </span>
-              <span className="flex items-center gap-1.5">
                 <HardDrive size={14} />
                 .dmg installer
               </span>
               <span className="flex items-center gap-1.5">
                 <Activity size={14} />
-                Free &amp; open source
+                macOS only
               </span>
             </div>
           </div>
