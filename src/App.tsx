@@ -5,6 +5,7 @@ import { Showcase } from './components/showcase'
 import { TechStack } from './components/tech-stack'
 import { DownloadCta } from './components/download-cta'
 import { Footer } from './components/footer'
+import { FeedbackWidget } from './components/feedback-widget'
 import { useScrollAnimation } from './hooks/use-scroll-animation'
 
 export default function App() {
@@ -19,6 +20,7 @@ export default function App() {
       <TechStack />
       <DownloadCta />
       <Footer />
+      <FeedbackWidget />
     </>
   )
 }
