@@ -8,6 +8,7 @@ import { DownloadCta } from './components/download-cta'
 import { Footer } from './components/footer'
 import { FeedbackWidget } from './components/feedback-widget'
 import { FeedbackAdmin } from './pages/feedback-admin'
+import { FeedbackPublic } from './pages/feedback-public'
 import { useScrollAnimation } from './hooks/use-scroll-animation'
 
 function useHashRoute() {
@@ -20,16 +21,8 @@ function useHashRoute() {
   return hash
 }
 
-export default function App() {
+function LandingPage() {
   useScrollAnimation()
-  const hash = useHashRoute()
-
-  // Admin route
-  if (hash === '#admin/feedback') {
-    return <FeedbackAdmin />
-  }
-
-  // Landing page
   return (
     <>
       <Navbar />
@@ -42,4 +35,13 @@ export default function App() {
       <FeedbackWidget />
     </>
   )
+}
+
+export default function App() {
+  const hash = useHashRoute()
+
+  if (hash === '#feedback') return <FeedbackPublic />
+  if (hash === '#admin/feedback') return <FeedbackAdmin />
+
+  return <LandingPage />
 }

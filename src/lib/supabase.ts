@@ -31,6 +31,17 @@ export async function submitFeedback(feedback: Feedback) {
   if (error) throw error
 }
 
+// Public fetch (requires RLS SELECT policy for anon)
+export async function fetchPublicFeedbacks() {
+  if (!supabase) throw new Error('Supabase is not configured')
+  const { data, error } = await supabase
+    .from('feedback')
+    .select('id, name, rating, message, status, created_at')
+    .order('created_at', { ascending: false })
+  if (error) throw error
+  return data as FeedbackRow[]
+}
+
 // Admin functions (require authenticated session)
 
 export async function fetchFeedbacks() {

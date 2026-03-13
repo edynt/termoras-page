@@ -24,7 +24,7 @@ export function FeedbackAdmin() {
   const [feedbacks, setFeedbacks] = useState<FeedbackRow[]>([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
-  const [filter, setFilter] = useState<Filter>('all')
+  const [filter, setFilter] = useState<Filter>('pending')
   const [deletingId, setDeletingId] = useState<string | null>(null)
   const [togglingId, setTogglingId] = useState<string | null>(null)
 
