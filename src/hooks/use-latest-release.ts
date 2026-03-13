@@ -3,8 +3,6 @@ import { useState, useEffect } from 'react'
 // Uses Vercel Edge proxy (api/latest-release.ts) to avoid GitHub API rate limits (60 req/hr).
 // CDN caches response for 5 min → only ~12 GitHub API calls/hr regardless of traffic.
 const RELEASE_API_URL = '/api/latest-release'
-const CACHE_KEY = 'termoras-latest-release'
-const CACHE_TTL_MS = 10 * 60 * 1000 // 10 minutes
 
 // Hardcoded fallback — always shows working links even if API fails
 const FALLBACK = {
@@ -19,11 +17,6 @@ interface ReleaseInfo {
   tagName: string
   aarch64DmgUrl: string
   x64DmgUrl: string
-}
-
-interface CachedRelease {
-  data: ReleaseInfo
-  timestamp: number
 }
 
 /** Parse GitHub API response into ReleaseInfo, matching assets by suffix */
@@ -44,29 +37,6 @@ function parseRelease(data: { tag_name?: string; assets?: { name: string; browse
   }
 }
 
-/** Try reading cached release from sessionStorage */
-function getCached(): ReleaseInfo | null {
-  try {
-    const raw = sessionStorage.getItem(CACHE_KEY)
-    if (!raw) return null
-    const cached: CachedRelease = JSON.parse(raw)
-    if (Date.now() - cached.timestamp > CACHE_TTL_MS) return null
-    return cached.data
-  } catch {
-    return null
-  }
-}
-
-/** Cache release info in sessionStorage */
-function setCache(data: ReleaseInfo) {
-  try {
-    const entry: CachedRelease = { data, timestamp: Date.now() }
-    sessionStorage.setItem(CACHE_KEY, JSON.stringify(entry))
-  } catch {
-    // sessionStorage unavailable — silently ignore
-  }
-}
-
 // Module-level in-flight promise to deduplicate concurrent fetches from multiple components
 let inflightPromise: Promise<ReleaseInfo | null> | null = null
 
@@ -77,25 +47,18 @@ function fetchLatestRelease(signal: AbortSignal): Promise<ReleaseInfo | null> {
         if (!res.ok) throw new Error(`GitHub API ${res.status}`)
         return res.json()
       })
-      .then(data => {
-        const info = parseRelease(data)
-        if (info) setCache(info)
-        return info
-      })
+      .then(data => parseRelease(data))
       .catch(() => null)
       .finally(() => { inflightPromise = null })
   }
   return inflightPromise
 }
 
-/** Fetches latest GitHub release info with sessionStorage caching and hardcoded fallback */
+/** Fetches latest GitHub release info with hardcoded fallback. Caching handled by Vercel Edge CDN. */
 export function useLatestRelease(): ReleaseInfo {
-  const [release, setRelease] = useState<ReleaseInfo>(() => getCached() ?? FALLBACK)
+  const [release, setRelease] = useState<ReleaseInfo>(FALLBACK)
 
   useEffect(() => {
-    // Skip fetch if cache is still valid
-    if (getCached()) return
-
     const controller = new AbortController()
 
     fetchLatestRelease(controller.signal).then(info => {

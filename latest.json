@@ -1,0 +1,15 @@
+{
+    "version": "0.1.1",
+    "notes": "Release notes here",
+    "pub_date": "2026-03-13T07:46:19Z",
+    "platforms": {
+        "darwin-aarch64": {
+            "signature": "<signature content from .sig file>",
+            "url": "https://github.com/edynt/termoras-page/releases/download/v0.1.1/Termoras_aarch64.app.tar.gz"
+        },
+        "darwin-x86_64": {
+            "signature": "<signature content from .sig file>",
+            "url": "https://github.com/edynt/termoras-page/releases/download/v0.1.1/Termoras_x64.app.tar.gz"
+        }
+    }
+}
