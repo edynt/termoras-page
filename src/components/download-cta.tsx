@@ -1,8 +1,8 @@
 import { Download, HardDrive, Activity } from 'lucide-react'
-
-const DOWNLOAD_BASE = 'https://github.com/edynt/termoras-page/releases/download/v0.1.0'
+import { useLatestRelease } from '../hooks/use-latest-release'
 
 export function DownloadCta() {
+  const { aarch64DmgUrl, x64DmgUrl } = useLatestRelease()
   return (
     <section className="py-24 pb-28 text-center relative" id="download">
       <div className="section-separator" />
@@ -38,7 +38,7 @@ export function DownloadCta() {
 
             <div className="flex gap-3 justify-center flex-wrap max-md:flex-col max-md:items-center">
               <a
-                href={`${DOWNLOAD_BASE}/Termoras_0.1.0_aarch64.dmg`}
+                href={aarch64DmgUrl}
                 className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl bg-gradient-to-br from-brand-blue to-brand-green text-[#0a0b0f] text-[15px] font-semibold transition-all duration-200 hover:-translate-y-0.5 btn-press"
                 style={{ boxShadow: '0 4px 24px rgba(107,161,241,0.3), 0 1px 3px rgba(0,0,0,0.1)' }}
               >
@@ -46,7 +46,7 @@ export function DownloadCta() {
                 macOS Apple Silicon
               </a>
               <a
-                href={`${DOWNLOAD_BASE}/Termoras_0.1.0_x64.dmg`}
+                href={x64DmgUrl}
                 className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl text-[15px] font-semibold transition-all duration-200 hover:-translate-y-0.5 btn-press"
                 style={{
                   background: 'var(--bg-card)',

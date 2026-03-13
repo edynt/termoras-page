@@ -13,12 +13,17 @@ export function FeedbackWidget() {
   const [message, setMessage] = useState('')
   const [errorMsg, setErrorMsg] = useState('')
   const modalRef = useRef<HTMLDivElement>(null)
+  const toggleRef = useRef<HTMLButtonElement>(null)
 
   // Close on outside click
   useEffect(() => {
     if (!open) return
     function handleClick(e: MouseEvent) {
-      if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
+      const target = e.target as Node
+      if (
+        modalRef.current && !modalRef.current.contains(target) &&
+        toggleRef.current && !toggleRef.current.contains(target)
+      ) {
         setOpen(false)
       }
     }
@@ -79,6 +84,7 @@ export function FeedbackWidget() {
     <>
       {/* Floating button */}
       <button
+        ref={toggleRef}
         onClick={() => {
           if (!open) reset()
           setOpen(!open)
