@@ -1,15 +1,19 @@
 import { useState, useEffect } from 'react'
 import { ThemeToggle } from './theme-toggle'
 
-const NAV_ITEMS: { label: string; hash: string }[] = [
+const hasDonate = !!import.meta.env.VITE_PAYPAL_ME_USERNAME ||
+  (!!import.meta.env.VITE_VIETQR_BANK_BIN && !!import.meta.env.VITE_VIETQR_ACCOUNT_NO)
+
+const NAV_ITEMS: { label: string; hash: string; isPage?: boolean }[] = [
   { label: 'Features', hash: 'features' },
   { label: 'Showcase', hash: 'showcase' },
   { label: 'Tech', hash: 'tech' },
   { label: 'Feedback', hash: 'feedback' },
 ]
-const hasDonate = !!import.meta.env.VITE_PAYPAL_ME_USERNAME ||
-  (!!import.meta.env.VITE_VIETQR_BANK_BIN && !!import.meta.env.VITE_VIETQR_ACCOUNT_NO)
-if (hasDonate) NAV_ITEMS.push({ label: 'Buy a coffee', hash: 'donate' })
+if (hasDonate) {
+  NAV_ITEMS.push({ label: 'Buy a coffee', hash: 'donate' })
+  NAV_ITEMS.push({ label: 'Donors', hash: 'donors', isPage: true })
+}
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -56,6 +60,12 @@ export function Navbar() {
               href={`#${item.hash}`}
               className="px-3.5 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-[var(--bg-tertiary)]"
               style={{ color: 'var(--text-secondary)' }}
+              {...(item.isPage ? {
+                onClick: (e: React.MouseEvent) => {
+                  e.preventDefault()
+                  window.location.hash = item.hash
+                }
+              } : {})}
             >
               {item.label}
             </a>

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Heart, Trophy, ArrowLeft, RefreshCw, Coffee } from 'lucide-react'
+import { Heart, Trophy, ArrowLeft, RefreshCw, Coffee, Crown, Medal, Award } from 'lucide-react'
 import { fetchPublicDonations, type DonationRow } from '../lib/supabase'
 import { ThemeToggle } from '../components/theme-toggle'
 
@@ -12,6 +12,33 @@ function formatAmount(d: DonationRow) {
 function toUsd(d: DonationRow) {
   return d.currency === 'VND' ? d.amount / 25_000 : d.amount
 }
+
+const RANK_CONFIG = [
+  {
+    icon: Crown,
+    color: '#f0c46f',
+    bg: 'linear-gradient(135deg, rgba(240,196,111,0.15), rgba(240,196,111,0.05))',
+    border: 'rgba(240,196,111,0.35)',
+    shadow: '0 4px 20px rgba(240,196,111,0.15)',
+    label: '1st',
+  },
+  {
+    icon: Medal,
+    color: '#b0b0b0',
+    bg: 'linear-gradient(135deg, rgba(176,176,176,0.12), rgba(176,176,176,0.04))',
+    border: 'rgba(176,176,176,0.3)',
+    shadow: '0 4px 16px rgba(176,176,176,0.1)',
+    label: '2nd',
+  },
+  {
+    icon: Award,
+    color: '#cd7f32',
+    bg: 'linear-gradient(135deg, rgba(205,127,50,0.12), rgba(205,127,50,0.04))',
+    border: 'rgba(205,127,50,0.3)',
+    shadow: '0 4px 16px rgba(205,127,50,0.1)',
+    label: '3rd',
+  },
+]
 
 export function DonorsPublic() {
   const [donations, setDonations] = useState<DonationRow[]>([])
@@ -45,8 +72,6 @@ export function DonorsPublic() {
     .slice(0, 10)
 
   const totalUsd = donations.reduce((sum, d) => sum + toUsd(d), 0)
-
-  const medalColors = ['#f0c46f', '#b0b0b0', '#cd7f32']
 
   return (
     <div className="min-h-screen" style={{ background: 'var(--bg-primary)' }}>
@@ -125,10 +150,10 @@ export function DonorsPublic() {
             className="md:col-span-1 rounded-xl p-5 self-start"
             style={{ background: 'var(--bg-card)', border: '1px solid var(--border-primary)' }}
           >
-            <div className="flex items-center gap-2 mb-4">
+            <div className="flex items-center gap-2 mb-5">
               <Trophy size={16} style={{ color: '#f0c46f' }} />
               <h2 className="text-sm font-bold" style={{ color: 'var(--text-primary)' }}>
-                Top Supporters
+                Top 10 Supporters
               </h2>
             </div>
 
@@ -138,36 +163,72 @@ export function DonorsPublic() {
               </p>
             )}
 
-            <div className="space-y-2.5">
-              {topDonors.map((donor, i) => (
-                <div key={donor.name} className="flex items-center gap-3">
-                  <span
-                    className="w-6 h-6 rounded-full flex items-center justify-center text-[11px] font-bold shrink-0"
+            <div className="space-y-2">
+              {topDonors.map((donor, i) => {
+                const isTop3 = i < 3
+                const rank = RANK_CONFIG[i]
+                const RankIcon = rank?.icon
+
+                return (
+                  <div
+                    key={donor.name}
+                    className="flex items-center gap-3 rounded-xl p-3 transition-all duration-200"
                     style={{
-                      background: i < 3 ? `${medalColors[i]}20` : 'var(--bg-tertiary)',
-                      color: i < 3 ? medalColors[i] : 'var(--text-tertiary)',
-                      border: i < 3 ? `1px solid ${medalColors[i]}40` : '1px solid var(--border-primary)',
+                      background: isTop3 ? rank.bg : 'transparent',
+                      border: isTop3 ? `1px solid ${rank.border}` : '1px solid transparent',
+                      boxShadow: isTop3 ? rank.shadow : 'none',
                     }}
                   >
-                    {i + 1}
-                  </span>
-                  <div className="min-w-0 flex-1">
-                    <p className="text-sm font-medium truncate" style={{ color: 'var(--text-primary)' }}>
-                      {donor.name}
-                    </p>
-                    <p className="text-[11px]" style={{ color: 'var(--text-tertiary)' }}>
-                      {donor.count} donation{donor.count > 1 ? 's' : ''}
-                    </p>
+                    {/* Rank badge */}
+                    <div
+                      className="w-8 h-8 rounded-full flex items-center justify-center shrink-0"
+                      style={{
+                        background: isTop3 ? `${rank.color}20` : 'var(--bg-tertiary)',
+                        border: isTop3 ? `2px solid ${rank.color}50` : '1px solid var(--border-primary)',
+                      }}
+                    >
+                      {isTop3 && RankIcon ? (
+                        <RankIcon size={14} style={{ color: rank.color }} />
+                      ) : (
+                        <span
+                          className="text-[11px] font-bold"
+                          style={{ color: 'var(--text-tertiary)' }}
+                        >
+                          {i + 1}
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Name & count */}
+                    <div className="min-w-0 flex-1">
+                      <p
+                        className="text-sm font-semibold truncate"
+                        style={{ color: isTop3 ? rank.color : 'var(--text-primary)' }}
+                      >
+                        {donor.name}
+                      </p>
+                      <p className="text-[11px]" style={{ color: 'var(--text-tertiary)' }}>
+                        {donor.count} donation{donor.count > 1 ? 's' : ''}
+                      </p>
+                    </div>
+
+                    {/* Amount */}
+                    <span
+                      className="text-xs font-bold shrink-0 px-2 py-0.5 rounded-full"
+                      style={{
+                        color: isTop3 ? rank.color : 'var(--color-brand-green)',
+                        background: isTop3 ? `${rank.color}15` : 'rgba(94,196,168,0.1)',
+                      }}
+                    >
+                      ~${Math.round(donor.totalUsd)}
+                    </span>
                   </div>
-                  <span className="text-xs font-semibold shrink-0" style={{ color: 'var(--color-brand-green)' }}>
-                    ~${Math.round(donor.totalUsd)}
-                  </span>
-                </div>
-              ))}
+                )
+              })}
             </div>
           </div>
 
-          {/* All Donations */}
+          {/* Recent Donations */}
           <div className="md:col-span-2">
             <h2 className="text-sm font-bold mb-4 flex items-center gap-2" style={{ color: 'var(--text-primary)' }}>
               <Heart size={16} style={{ color: '#f06f6f' }} />
