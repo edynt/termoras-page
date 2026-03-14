@@ -72,6 +72,51 @@ export async function deleteFeedback(id: string) {
   if (error) throw error
 }
 
+// --- Donations ---
+
+export type DonationCurrency = 'USD' | 'VND'
+
+export interface DonationRow {
+  id: string
+  name: string
+  amount: number
+  currency: DonationCurrency
+  message: string | null
+  created_at: string
+}
+
+export async function fetchPublicDonations() {
+  if (!supabase) throw new Error('Supabase is not configured')
+  const { data, error } = await supabase
+    .from('donations')
+    .select('id, name, amount, currency, message, created_at')
+    .order('created_at', { ascending: false })
+  if (error) throw error
+  return data as DonationRow[]
+}
+
+export async function fetchDonations() {
+  if (!supabase) throw new Error('Supabase is not configured')
+  const { data, error } = await supabase
+    .from('donations')
+    .select('*')
+    .order('created_at', { ascending: false })
+  if (error) throw error
+  return data as DonationRow[]
+}
+
+export async function insertDonation(donation: Omit<DonationRow, 'id' | 'created_at'>) {
+  if (!supabase) throw new Error('Supabase is not configured')
+  const { error } = await supabase.from('donations').insert(donation)
+  if (error) throw error
+}
+
+export async function deleteDonation(id: string) {
+  if (!supabase) throw new Error('Supabase is not configured')
+  const { error } = await supabase.from('donations').delete().eq('id', id)
+  if (error) throw error
+}
+
 // Auth helpers
 
 export async function signIn(email: string, password: string) {

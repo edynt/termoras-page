@@ -1,6 +1,16 @@
 import { useState, useEffect } from 'react'
 import { ThemeToggle } from './theme-toggle'
 
+const NAV_ITEMS: { label: string; hash: string }[] = [
+  { label: 'Features', hash: 'features' },
+  { label: 'Showcase', hash: 'showcase' },
+  { label: 'Tech', hash: 'tech' },
+  { label: 'Feedback', hash: 'feedback' },
+]
+const hasDonate = !!import.meta.env.VITE_PAYPAL_ME_USERNAME ||
+  (!!import.meta.env.VITE_VIETQR_BANK_BIN && !!import.meta.env.VITE_VIETQR_ACCOUNT_NO)
+if (hasDonate) NAV_ITEMS.push({ label: 'Buy a coffee', hash: 'donate' })
+
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false)
 
@@ -40,14 +50,14 @@ export function Navbar() {
         </a>
 
         <div className="hidden md:flex items-center gap-1">
-          {['Features', 'Showcase', 'Tech', 'Feedback'].map((item) => (
+          {NAV_ITEMS.map((item) => (
             <a
-              key={item}
-              href={`#${item.toLowerCase()}`}
+              key={item.hash}
+              href={`#${item.hash}`}
               className="px-3.5 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:bg-[var(--bg-tertiary)]"
               style={{ color: 'var(--text-secondary)' }}
             >
-              {item}
+              {item.label}
             </a>
           ))}
 

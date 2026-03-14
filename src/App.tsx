@@ -5,10 +5,13 @@ import { Features } from './components/features'
 import { Showcase } from './components/showcase'
 import { TechStack } from './components/tech-stack'
 import { DownloadCta } from './components/download-cta'
+import { DonateSection } from './components/donate-section'
 import { Footer } from './components/footer'
 import { FeedbackWidget } from './components/feedback-widget'
 import { FeedbackAdmin } from './pages/feedback-admin'
 import { FeedbackPublic } from './pages/feedback-public'
+import { DonorsPublic } from './pages/donors-public'
+import { DonorsAdmin } from './pages/donors-admin'
 import { useScrollAnimation } from './hooks/use-scroll-animation'
 
 function useHashRoute() {
@@ -31,6 +34,7 @@ function LandingPage() {
       <Showcase />
       <TechStack />
       <DownloadCta />
+      <DonateSection />
       <Footer />
       <FeedbackWidget />
     </>
@@ -42,6 +46,8 @@ export default function App() {
 
   if (hash === '#feedback') return <FeedbackPublic />
   if (hash === '#admin/feedback') return <FeedbackAdmin />
+  if (hash === '#donors') return <DonorsPublic />
+  if (hash === '#admin/donors') return <DonorsAdmin />
 
   return <LandingPage />
 }
