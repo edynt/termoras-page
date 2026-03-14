@@ -79,7 +79,7 @@ export function DonateSection() {
         </div>
 
         <h2 className="fade-up text-[clamp(28px,4vw,40px)] font-extrabold tracking-tight mb-4">
-          Buy us a <span className="gradient-text">coffee</span>
+          <span className="gradient-text font-extrabold">Buy us a coffee</span>
         </h2>
         <p className="fade-up text-base mb-10 max-w-md mx-auto" style={{ color: 'var(--text-secondary)' }}>
           If Termoras helps your workflow, a small contribution keeps development going.
