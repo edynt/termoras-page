@@ -8,9 +8,10 @@ const RELEASE_API_URL = '/api/latest-release'
 const FALLBACK = {
   version: '0.1.1',
   tagName: 'v0.1.1',
-  aarch64DmgUrl: 'https://github.com/edynt/termoras-page/releases/download/v0.1.1/Termoras_0.1.1_aarch64.dmg',
-  x64DmgUrl: 'https://github.com/edynt/termoras-page/releases/download/v0.1.1/Termoras_0.1.1_x64.dmg',
-  amd64DebUrl: 'https://github.com/edynt/termoras-page/releases/download/v0.1.1/Termoras_0.1.1_amd64.deb',
+  aarch64DmgUrl: 'https://github.com/edynt/termoras/releases/download/v0.1.1/Termoras_0.1.1_aarch64.dmg',
+  x64DmgUrl: 'https://github.com/edynt/termoras/releases/download/v0.1.1/Termoras_0.1.1_x64.dmg',
+  amd64DebUrl: 'https://github.com/edynt/termoras/releases/download/v0.1.1/Termoras_0.1.1_amd64.deb',
+  windowsX64Url: 'https://github.com/edynt/termoras/releases/download/v0.1.1/Termoras_0.1.1_x64-setup.exe',
 }
 
 interface ReleaseInfo {
@@ -19,6 +20,7 @@ interface ReleaseInfo {
   aarch64DmgUrl: string
   x64DmgUrl: string
   amd64DebUrl: string
+  windowsX64Url: string
 }
 
 /** Parse GitHub API response into ReleaseInfo, matching assets by suffix */
@@ -31,6 +33,7 @@ function parseRelease(data: { tag_name?: string; assets?: { name: string; browse
   const aarch64Asset = data.assets.find(a => a.name.endsWith('aarch64.dmg'))
   const x64Asset = data.assets.find(a => a.name.endsWith('x64.dmg'))
   const debAsset = data.assets.find(a => a.name.endsWith('amd64.deb'))
+  const windowsAsset = data.assets.find(a => a.name.endsWith('x64-setup.exe') || a.name.endsWith('x64_en-US.msi'))
 
   return {
     version,
@@ -38,6 +41,7 @@ function parseRelease(data: { tag_name?: string; assets?: { name: string; browse
     aarch64DmgUrl: aarch64Asset?.browser_download_url ?? FALLBACK.aarch64DmgUrl,
     x64DmgUrl: x64Asset?.browser_download_url ?? FALLBACK.x64DmgUrl,
     amd64DebUrl: debAsset?.browser_download_url ?? FALLBACK.amd64DebUrl,
+    windowsX64Url: windowsAsset?.browser_download_url ?? FALLBACK.windowsX64Url,
   }
 }
 

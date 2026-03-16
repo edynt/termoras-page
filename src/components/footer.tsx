@@ -1,3 +1,4 @@
+import { Github } from 'lucide-react'
 import { useLanguage } from '../context/language-context'
 
 export function Footer() {
@@ -16,6 +17,16 @@ export function Footer() {
         <p className="text-[13px] mb-4" style={{ color: 'var(--text-muted)' }}>
           {t.footer.tagline}
         </p>
+        <a
+          href="https://github.com/edynt/termoras"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 text-[13px] font-medium transition-colors duration-200 hover:text-brand-blue"
+          style={{ color: 'var(--text-secondary)' }}
+        >
+          <Github size={15} />
+          {t.footer.openSource}
+        </a>
         <p className="text-[12px] mt-6" style={{ color: 'var(--text-muted)' }}>
           {t.footer.copy}
         </p>

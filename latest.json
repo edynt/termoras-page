@@ -5,11 +5,11 @@
     "platforms": {
         "darwin-aarch64": {
             "signature": "<signature content from .sig file>",
-            "url": "https://github.com/edynt/termoras-page/releases/download/v0.1.1/Termoras_aarch64.app.tar.gz"
+            "url": "https://github.com/edynt/termoras/releases/download/v0.1.1/Termoras_aarch64.app.tar.gz"
         },
         "darwin-x86_64": {
             "signature": "<signature content from .sig file>",
-            "url": "https://github.com/edynt/termoras-page/releases/download/v0.1.1/Termoras_x64.app.tar.gz"
+            "url": "https://github.com/edynt/termoras/releases/download/v0.1.1/Termoras_x64.app.tar.gz"
         }
     }
 }

@@ -1,6 +1,6 @@
 export const config = { runtime: 'edge' }
 
-const GITHUB_API = 'https://api.github.com/repos/edynt/termoras-page/releases/latest'
+const GITHUB_API = 'https://api.github.com/repos/edynt/termoras/releases/latest'
 
 export default async function handler() {
   try {

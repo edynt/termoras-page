@@ -13,7 +13,7 @@ export const translations = {
 
     // Hero
     hero: {
-      badgeSuffix: '— Now available for macOS & Linux',
+      badgeSuffix: '— Now available for macOS, Linux & Windows',
       headingLine1: 'Your terminals,',
       headingHighlight: 'organized.',
       subtitle:
@@ -21,8 +21,9 @@ export const translations = {
       downloadAppleSilicon: 'macOS Apple Silicon',
       downloadIntel: 'macOS Intel',
       downloadLinux: 'Linux Ubuntu / Debian',
-      metaSuffix: '.dmg / .deb installer',
-      trustLine: 'Free forever. No sign-up. Fully offline. Your code stays on your machine.',
+      downloadWindows: 'Windows x64',
+      metaSuffix: '.dmg / .deb / .exe installer',
+      trustLine: 'Free & open source. No sign-up. Fully offline. Your code stays on your machine.',
     },
 
     // About / Description
@@ -116,8 +117,9 @@ export const translations = {
       appleSilicon: 'macOS Apple Silicon',
       intel: 'macOS Intel',
       linux: 'Linux Ubuntu / Debian',
-      dmg: '.dmg / .deb installer',
-      macOnly: 'macOS & Linux',
+      windows: 'Windows x64',
+      dmg: '.dmg / .deb / .exe installer',
+      macOnly: 'macOS, Linux & Windows',
       trustNoData: 'No data collection',
       trustOffline: 'Works offline',
       trustNoAccount: 'No account needed',
@@ -127,6 +129,7 @@ export const translations = {
     footer: {
       tagline: 'A native terminal manager for developers.',
       copy: '© 2026 Termoras. Built with Tauri + React + Rust.',
+      openSource: 'Open Source on GitHub',
     },
 
     // Feedback widget
@@ -209,7 +212,7 @@ export const translations = {
 
     // Hero
     hero: {
-      badgeSuffix: '— Đã có sẵn cho macOS & Linux',
+      badgeSuffix: '— Đã có sẵn cho macOS, Linux & Windows',
       headingLine1: 'Terminal của bạn,',
       headingHighlight: 'ngăn nắp.',
       subtitle:
@@ -217,8 +220,9 @@ export const translations = {
       downloadAppleSilicon: 'macOS Apple Silicon',
       downloadIntel: 'macOS Intel',
       downloadLinux: 'Linux Ubuntu / Debian',
-      metaSuffix: 'Bộ cài .dmg / .deb',
-      trustLine: 'Miễn phí mãi mãi. Không cần đăng ký. Hoàn toàn offline. Code của bạn luôn nằm trên máy bạn.',
+      downloadWindows: 'Windows x64',
+      metaSuffix: 'Bộ cài .dmg / .deb / .exe',
+      trustLine: 'Miễn phí & mã nguồn mở. Không cần đăng ký. Hoàn toàn offline. Code của bạn luôn nằm trên máy bạn.',
     },
 
     // About / Description
@@ -312,8 +316,9 @@ export const translations = {
       appleSilicon: 'macOS Apple Silicon',
       intel: 'macOS Intel',
       linux: 'Linux Ubuntu / Debian',
-      dmg: 'Bộ cài .dmg / .deb',
-      macOnly: 'macOS & Linux',
+      windows: 'Windows x64',
+      dmg: 'Bộ cài .dmg / .deb / .exe',
+      macOnly: 'macOS, Linux & Windows',
       trustNoData: 'Không thu thập dữ liệu',
       trustOffline: 'Hoạt động offline',
       trustNoAccount: 'Không cần tài khoản',
@@ -323,6 +328,7 @@ export const translations = {
     footer: {
       tagline: 'Trình quản lý terminal cho lập trình viên.',
       copy: '© 2026 Termoras. Xây dựng với Tauri + React + Rust.',
+      openSource: 'Mã nguồn mở trên GitHub',
     },
 
     // Feedback widget
