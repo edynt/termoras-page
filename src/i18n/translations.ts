@@ -13,14 +13,15 @@ export const translations = {
 
     // Hero
     hero: {
-      badgeSuffix: '— Now available for macOS',
+      badgeSuffix: '— Now available for macOS & Linux',
       headingLine1: 'Your terminals,',
       headingHighlight: 'organized.',
       subtitle:
         'A native desktop app that organizes your terminals by project — with built-in task boards, Git integration, and command automation.',
       downloadAppleSilicon: 'macOS Apple Silicon',
       downloadIntel: 'macOS Intel',
-      metaSuffix: '.dmg installer',
+      downloadLinux: 'Linux Ubuntu / Debian',
+      metaSuffix: '.dmg / .deb installer',
       trustLine: 'Free forever. No sign-up. Fully offline. Your code stays on your machine.',
     },
 
@@ -114,8 +115,9 @@ export const translations = {
       subtitle: 'Download Termoras for free and get started in seconds.',
       appleSilicon: 'macOS Apple Silicon',
       intel: 'macOS Intel',
-      dmg: '.dmg installer',
-      macOnly: 'macOS only',
+      linux: 'Linux Ubuntu / Debian',
+      dmg: '.dmg / .deb installer',
+      macOnly: 'macOS & Linux',
       trustNoData: 'No data collection',
       trustOffline: 'Works offline',
       trustNoAccount: 'No account needed',
@@ -207,14 +209,15 @@ export const translations = {
 
     // Hero
     hero: {
-      badgeSuffix: '— Đã có sẵn cho macOS',
+      badgeSuffix: '— Đã có sẵn cho macOS & Linux',
       headingLine1: 'Terminal của bạn,',
       headingHighlight: 'ngăn nắp.',
       subtitle:
         'Ứng dụng desktop giúp gom nhóm terminal theo dự án — tích hợp bảng công việc, Git, và tự động hóa lệnh.',
       downloadAppleSilicon: 'macOS Apple Silicon',
       downloadIntel: 'macOS Intel',
-      metaSuffix: 'Bộ cài .dmg',
+      downloadLinux: 'Linux Ubuntu / Debian',
+      metaSuffix: 'Bộ cài .dmg / .deb',
       trustLine: 'Miễn phí mãi mãi. Không cần đăng ký. Hoàn toàn offline. Code của bạn luôn nằm trên máy bạn.',
     },
 
@@ -308,8 +311,9 @@ export const translations = {
       subtitle: 'Tải Termoras miễn phí và bắt đầu trong vài giây.',
       appleSilicon: 'macOS Apple Silicon',
       intel: 'macOS Intel',
-      dmg: 'Bộ cài .dmg',
-      macOnly: 'Chỉ macOS',
+      linux: 'Linux Ubuntu / Debian',
+      dmg: 'Bộ cài .dmg / .deb',
+      macOnly: 'macOS & Linux',
       trustNoData: 'Không thu thập dữ liệu',
       trustOffline: 'Hoạt động offline',
       trustNoAccount: 'Không cần tài khoản',

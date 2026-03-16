@@ -3,7 +3,7 @@ import { useLatestRelease } from '../hooks/use-latest-release'
 import { useLanguage } from '../context/language-context'
 
 export function DownloadCta() {
-  const { aarch64DmgUrl, x64DmgUrl } = useLatestRelease()
+  const { aarch64DmgUrl, x64DmgUrl, amd64DebUrl } = useLatestRelease()
   const { t } = useLanguage()
 
   return (
@@ -61,6 +61,20 @@ export function DownloadCta() {
               >
                 <Download size={17} style={{ opacity: 0.5 }} />
                 {t.downloadCta.intel}
+              </a>
+              <a
+                href={amd64DebUrl}
+                className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl text-[15px] font-semibold transition-all duration-200 hover:-translate-y-0.5 btn-press"
+                style={{
+                  background: 'var(--bg-card)',
+                  border: '1px solid var(--border-primary)',
+                  color: 'var(--text-primary)',
+                  boxShadow: 'var(--shadow-card)',
+                  backdropFilter: 'blur(12px)',
+                }}
+              >
+                <Download size={17} style={{ opacity: 0.5 }} />
+                {t.downloadCta.linux}
               </a>
             </div>
 
