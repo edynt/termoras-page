@@ -123,7 +123,7 @@ export const translations = {
       copy: '© 2026 Termoras. Built with Tauri + React + Rust.',
     },
 
-    // Feedback
+    // Feedback widget
     feedback: {
       btnLabel: 'Feedback',
       title: 'Send Feedback',
@@ -137,6 +137,55 @@ export const translations = {
       send: 'Send Feedback',
       thankYou: 'Thank you!',
       submitted: 'Your feedback has been submitted.',
+    },
+
+    // Feedback public page
+    feedbackPage: {
+      title: 'Community Feedback',
+      subtitle: 'See what others are saying about Termoras',
+      total: 'Total',
+      avgRating: 'Avg Rating',
+      resolved: 'Resolved',
+      filterAll: 'All',
+      filterPending: 'Pending',
+      filterResolved: 'Resolved',
+      dismiss: 'Dismiss',
+      noFeedbacks: 'No feedbacks yet. Be the first!',
+      noFiltered: 'No {filter} feedbacks.',
+      statusResolved: 'Resolved',
+      statusPending: 'Pending',
+      backToHome: 'Back to home',
+    },
+
+    // Donors public page
+    donorsPage: {
+      title: 'Wall of Thanks',
+      subtitle: 'Everyone who bought us a coffee',
+      totalDonors: 'Total Donors',
+      donations: 'Donations',
+      totalRaised: 'Total Raised',
+      topSupporters: 'Top 10 Supporters',
+      noDonationsYet: 'No donations yet. Be the first!',
+      recentDonations: 'Recent Donations',
+      noDonationsEmpty: 'No donations yet. Be the first to buy us a coffee!',
+      buyACoffee: 'Buy a coffee',
+      donation: 'donation',
+      donationPlural: 'donations',
+    },
+
+    // Donate section
+    donate: {
+      badge: 'Support Us',
+      title: 'Buy us a coffee',
+      subtitle: 'If Termoras helps your workflow, a small contribution keeps development going.',
+      paypal: 'PayPal',
+      bankTransfer: 'Bank Transfer',
+      or: 'or',
+      custom: 'Custom',
+      buyViaPaypal: 'Buy a ${amount} coffee via PayPal',
+      paypalRedirect: "You'll be redirected to PayPal to complete.",
+      scanQr: 'Scan QR code with your banking app',
+      qrAutoFill: 'Amount & transfer note are pre-filled automatically.',
     },
   },
 
@@ -264,7 +313,7 @@ export const translations = {
       copy: '© 2026 Termoras. Xây dựng với Tauri + React + Rust.',
     },
 
-    // Feedback
+    // Feedback widget
     feedback: {
       btnLabel: 'Góp ý',
       title: 'Gửi góp ý',
@@ -278,6 +327,55 @@ export const translations = {
       send: 'Gửi góp ý',
       thankYou: 'Cảm ơn bạn!',
       submitted: 'Góp ý của bạn đã được gửi.',
+    },
+
+    // Feedback public page
+    feedbackPage: {
+      title: 'Góp ý cộng đồng',
+      subtitle: 'Xem mọi người nói gì về Termoras',
+      total: 'Tổng',
+      avgRating: 'Đánh giá TB',
+      resolved: 'Đã xử lý',
+      filterAll: 'Tất cả',
+      filterPending: 'Chờ xử lý',
+      filterResolved: 'Đã xử lý',
+      dismiss: 'Bỏ qua',
+      noFeedbacks: 'Chưa có góp ý. Hãy là người đầu tiên!',
+      noFiltered: 'Không có góp ý {filter}.',
+      statusResolved: 'Đã xử lý',
+      statusPending: 'Chờ xử lý',
+      backToHome: 'Về trang chủ',
+    },
+
+    // Donors public page
+    donorsPage: {
+      title: 'Bảng tri ân',
+      subtitle: 'Những người đã mua cà phê cho chúng tôi',
+      totalDonors: 'Nhà tài trợ',
+      donations: 'Lượt ủng hộ',
+      totalRaised: 'Tổng quyên góp',
+      topSupporters: 'Top 10 người ủng hộ',
+      noDonationsYet: 'Chưa có quyên góp. Hãy là người đầu tiên!',
+      recentDonations: 'Quyên góp gần đây',
+      noDonationsEmpty: 'Chưa có quyên góp. Hãy là người đầu tiên mua cà phê cho chúng tôi!',
+      buyACoffee: 'Mua cà phê',
+      donation: 'lượt',
+      donationPlural: 'lượt',
+    },
+
+    // Donate section
+    donate: {
+      badge: 'Ủng hộ',
+      title: 'Mua cà phê cho chúng tôi',
+      subtitle: 'Nếu Termoras giúp ích cho công việc của bạn, một đóng góp nhỏ giúp duy trì phát triển.',
+      paypal: 'PayPal',
+      bankTransfer: 'Chuyển khoản',
+      or: 'hoặc',
+      custom: 'Tùy chỉnh',
+      buyViaPaypal: 'Mua cà phê ${amount} qua PayPal',
+      paypalRedirect: 'Bạn sẽ được chuyển đến PayPal để hoàn tất.',
+      scanQr: 'Quét mã QR bằng ứng dụng ngân hàng',
+      qrAutoFill: 'Số tiền và nội dung chuyển khoản được điền sẵn tự động.',
     },
   },
 }

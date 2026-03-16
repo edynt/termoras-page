@@ -2,10 +2,13 @@ import { useState, useEffect } from 'react'
 import { Star, CheckCircle, Clock, MessageSquare, ArrowLeft, RefreshCw } from 'lucide-react'
 import { fetchPublicFeedbacks, type FeedbackRow, type FeedbackStatus } from '../lib/supabase'
 import { ThemeToggle } from '../components/theme-toggle'
+import { LanguageToggle } from '../components/language-toggle'
+import { useLanguage } from '../context/language-context'
 
 type Filter = 'all' | FeedbackStatus
 
 export function FeedbackPublic() {
+  const { t } = useLanguage()
   const [feedbacks, setFeedbacks] = useState<FeedbackRow[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
@@ -58,16 +61,16 @@ export function FeedbackPublic() {
               }}
               className="p-2 rounded-lg transition-colors hover:bg-[var(--bg-tertiary)]"
               style={{ color: 'var(--text-secondary)' }}
-              title="Back to home"
+              title={t.feedbackPage.backToHome}
             >
               <ArrowLeft size={18} />
             </a>
             <div>
               <h1 className="text-lg font-bold" style={{ color: 'var(--text-primary)' }}>
-                Community Feedback
+                {t.feedbackPage.title}
               </h1>
               <p className="text-xs" style={{ color: 'var(--text-tertiary)' }}>
-                See what others are saying about Termoras
+                {t.feedbackPage.subtitle}
               </p>
             </div>
           </div>
@@ -81,6 +84,7 @@ export function FeedbackPublic() {
             >
               <RefreshCw size={16} className={loading ? 'animate-spin' : ''} />
             </button>
+            <LanguageToggle />
             <ThemeToggle />
           </div>
         </div>
@@ -90,9 +94,9 @@ export function FeedbackPublic() {
         {/* Stats overview */}
         <div className="grid grid-cols-3 gap-3 mb-6">
           {[
-            { label: 'Total', value: feedbacks.length, icon: MessageSquare, color: 'var(--text-primary)' },
-            { label: 'Avg Rating', value: avgRating, icon: Star, color: '#f0c46f' },
-            { label: 'Resolved', value: `${feedbacks.length > 0 ? Math.round((resolvedCount / feedbacks.length) * 100) : 0}%`, icon: CheckCircle, color: '#5ec4a8' },
+            { label: t.feedbackPage.total, value: feedbacks.length, icon: MessageSquare, color: 'var(--text-primary)' },
+            { label: t.feedbackPage.avgRating, value: avgRating, icon: Star, color: '#f0c46f' },
+            { label: t.feedbackPage.resolved, value: `${feedbacks.length > 0 ? Math.round((resolvedCount / feedbacks.length) * 100) : 0}%`, icon: CheckCircle, color: '#5ec4a8' },
           ].map(({ label, value, icon: Icon, color }) => (
             <div
               key={label}
@@ -112,9 +116,9 @@ export function FeedbackPublic() {
         {/* Filters */}
         <div className="flex flex-wrap gap-2 mb-6">
           {([
-            { key: 'all' as Filter, label: 'All', count: feedbacks.length },
-            { key: 'pending' as Filter, label: 'Pending', count: pendingCount },
-            { key: 'resolved' as Filter, label: 'Resolved', count: resolvedCount },
+            { key: 'all' as Filter, label: t.feedbackPage.filterAll, count: feedbacks.length },
+            { key: 'pending' as Filter, label: t.feedbackPage.filterPending, count: pendingCount },
+            { key: 'resolved' as Filter, label: t.feedbackPage.filterResolved, count: resolvedCount },
           ]).map(({ key, label, count }) => (
             <button
               key={key}
@@ -145,7 +149,7 @@ export function FeedbackPublic() {
           >
             {error}
             <button onClick={() => setError('')} className="ml-auto underline cursor-pointer">
-              Dismiss
+              {t.feedbackPage.dismiss}
             </button>
           </div>
         )}
@@ -162,7 +166,9 @@ export function FeedbackPublic() {
           <div className="text-center py-12">
             <MessageSquare size={40} className="mx-auto mb-3" style={{ color: 'var(--text-muted)' }} />
             <p className="text-sm" style={{ color: 'var(--text-tertiary)' }}>
-              {feedbacks.length === 0 ? 'No feedbacks yet. Be the first!' : `No ${filter} feedbacks.`}
+              {feedbacks.length === 0
+                ? t.feedbackPage.noFeedbacks
+                : t.feedbackPage.noFiltered.replace('{filter}', filter)}
             </p>
           </div>
         )}
@@ -209,8 +215,8 @@ export function FeedbackPublic() {
                     }}
                   >
                     {fb.status === 'resolved'
-                      ? <><CheckCircle size={10} /> Resolved</>
-                      : <><Clock size={10} /> Pending</>
+                      ? <><CheckCircle size={10} /> {t.feedbackPage.statusResolved}</>
+                      : <><Clock size={10} /> {t.feedbackPage.statusPending}</>
                     }
                   </span>
                   <span className="text-[10px]" style={{ color: 'var(--text-muted)' }}>

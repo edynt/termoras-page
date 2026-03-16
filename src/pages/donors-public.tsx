@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react'
 import { Heart, Trophy, ArrowLeft, RefreshCw, Coffee, Crown, Medal, Award } from 'lucide-react'
 import { fetchPublicDonations, type DonationRow } from '../lib/supabase'
 import { ThemeToggle } from '../components/theme-toggle'
+import { LanguageToggle } from '../components/language-toggle'
+import { useLanguage } from '../context/language-context'
 
 function formatAmount(d: DonationRow) {
   if (d.currency === 'VND') return d.amount.toLocaleString('vi-VN') + 'đ'
@@ -41,6 +43,7 @@ const RANK_CONFIG = [
 ]
 
 export function DonorsPublic() {
+  const { t } = useLanguage()
   const [donations, setDonations] = useState<DonationRow[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
@@ -96,16 +99,16 @@ export function DonorsPublic() {
               }}
               className="p-2 rounded-lg transition-colors hover:bg-[var(--bg-tertiary)]"
               style={{ color: 'var(--text-secondary)' }}
-              title="Back to home"
+              title={t.feedbackPage.backToHome}
             >
               <ArrowLeft size={18} />
             </a>
             <div>
               <h1 className="text-lg font-bold" style={{ color: 'var(--text-primary)' }}>
-                Wall of Thanks
+                {t.donorsPage.title}
               </h1>
               <p className="text-xs" style={{ color: 'var(--text-tertiary)' }}>
-                Everyone who bought us a coffee
+                {t.donorsPage.subtitle}
               </p>
             </div>
           </div>
@@ -119,6 +122,7 @@ export function DonorsPublic() {
             >
               <RefreshCw size={16} className={loading ? 'animate-spin' : ''} />
             </button>
+            <LanguageToggle />
             <ThemeToggle />
           </div>
         </div>
@@ -128,9 +132,9 @@ export function DonorsPublic() {
         {/* Stats */}
         <div className="grid grid-cols-3 gap-3 mb-6">
           {[
-            { label: 'Total Donors', value: Object.keys(aggregated).length, icon: Heart, color: '#f06f6f' },
-            { label: 'Donations', value: donations.length, icon: Coffee, color: 'var(--color-brand-purple)' },
-            { label: 'Total Raised', value: `$${Math.round(totalUsd)}`, icon: Trophy, color: '#f0c46f' },
+            { label: t.donorsPage.totalDonors, value: Object.keys(aggregated).length, icon: Heart, color: '#f06f6f' },
+            { label: t.donorsPage.donations, value: donations.length, icon: Coffee, color: 'var(--color-brand-purple)' },
+            { label: t.donorsPage.totalRaised, value: `$${Math.round(totalUsd)}`, icon: Trophy, color: '#f0c46f' },
           ].map(({ label, value, icon: Icon, color }) => (
             <div
               key={label}
@@ -153,13 +157,13 @@ export function DonorsPublic() {
             <div className="flex items-center gap-2 mb-5">
               <Trophy size={16} style={{ color: '#f0c46f' }} />
               <h2 className="text-sm font-bold" style={{ color: 'var(--text-primary)' }}>
-                Top 10 Supporters
+                {t.donorsPage.topSupporters}
               </h2>
             </div>
 
             {topDonors.length === 0 && !loading && (
               <p className="text-xs text-center py-4" style={{ color: 'var(--text-tertiary)' }}>
-                No donations yet. Be the first!
+                {t.donorsPage.noDonationsYet}
               </p>
             )}
 
@@ -208,7 +212,7 @@ export function DonorsPublic() {
                         {donor.name}
                       </p>
                       <p className="text-[11px]" style={{ color: 'var(--text-tertiary)' }}>
-                        {donor.count} donation{donor.count > 1 ? 's' : ''}
+                        {donor.count} {donor.count > 1 ? t.donorsPage.donationPlural : t.donorsPage.donation}
                       </p>
                     </div>
 
@@ -232,7 +236,7 @@ export function DonorsPublic() {
           <div className="md:col-span-2">
             <h2 className="text-sm font-bold mb-4 flex items-center gap-2" style={{ color: 'var(--text-primary)' }}>
               <Heart size={16} style={{ color: '#f06f6f' }} />
-              Recent Donations
+              {t.donorsPage.recentDonations}
             </h2>
 
             {error && (
@@ -241,7 +245,7 @@ export function DonorsPublic() {
                 style={{ background: 'rgba(240,111,111,0.1)', border: '1px solid rgba(240,111,111,0.2)', color: '#f06f6f' }}
               >
                 {error}
-                <button onClick={() => setError('')} className="ml-auto underline cursor-pointer">Dismiss</button>
+                <button onClick={() => setError('')} className="ml-auto underline cursor-pointer">{t.feedbackPage.dismiss}</button>
               </div>
             )}
 
@@ -255,7 +259,7 @@ export function DonorsPublic() {
               <div className="text-center py-12">
                 <Coffee size={40} className="mx-auto mb-3" style={{ color: 'var(--text-muted)' }} />
                 <p className="text-sm" style={{ color: 'var(--text-tertiary)' }}>
-                  No donations yet. Be the first to buy us a coffee!
+                  {t.donorsPage.noDonationsEmpty}
                 </p>
                 <a
                   href="/#donate"
@@ -266,7 +270,7 @@ export function DonorsPublic() {
                   }}
                 >
                   <Coffee size={14} />
-                  Buy a coffee
+                  {t.donorsPage.buyACoffee}
                 </a>
               </div>
             )}

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Coffee, CreditCard, QrCode } from 'lucide-react'
+import { useLanguage } from '../context/language-context'
 
 const PAYPAL_PRESETS = [5, 10, 25, 50]
 const VND_PRESETS = [50_000, 100_000, 200_000, 500_000]
@@ -27,6 +28,7 @@ function getVietQrUrl(amount: number) {
 type Tab = 'paypal' | 'bank'
 
 export function DonateSection() {
+  const { t } = useLanguage()
   const hasPaypal = !!import.meta.env.VITE_PAYPAL_ME_USERNAME
   const hasBank = !!import.meta.env.VITE_VIETQR_BANK_BIN && !!import.meta.env.VITE_VIETQR_ACCOUNT_NO
 
@@ -74,15 +76,15 @@ export function DonateSection() {
             }}
           >
             <Coffee size={13} />
-            Support Us
+            {t.donate.badge}
           </span>
         </div>
 
         <h2 className="fade-up text-[clamp(28px,4vw,40px)] font-extrabold tracking-tight mb-4">
-          <span className="gradient-text font-extrabold">Buy us a coffee</span>
+          <span className="gradient-text font-extrabold">{t.donate.title}</span>
         </h2>
         <p className="fade-up text-base mb-10 max-w-md mx-auto" style={{ color: 'var(--text-secondary)' }}>
-          If Termoras helps your workflow, a small contribution keeps development going.
+          {t.donate.subtitle}
         </p>
 
         {/* Payment card */}
@@ -107,7 +109,7 @@ export function DonateSection() {
                 }}
               >
                 <CreditCard size={15} />
-                PayPal
+                {t.donate.paypal}
               </button>
               <button
                 onClick={() => setTab('bank')}
@@ -119,7 +121,7 @@ export function DonateSection() {
                 }}
               >
                 <QrCode size={15} />
-                Bank Transfer
+                {t.donate.bankTransfer}
               </button>
             </div>
           )}
@@ -148,7 +150,7 @@ export function DonateSection() {
 
               {/* Custom amount input */}
               <div className="flex items-center gap-2 justify-center mb-6">
-                <span className="text-sm" style={{ color: 'var(--text-tertiary)' }}>or</span>
+                <span className="text-sm" style={{ color: 'var(--text-tertiary)' }}>{t.donate.or}</span>
                 <div className="relative">
                   <span
                     className="absolute left-3 top-1/2 -translate-y-1/2 text-sm font-medium"
@@ -159,7 +161,7 @@ export function DonateSection() {
                   <input
                     type="number"
                     min="1"
-                    placeholder="Custom"
+                    placeholder={t.donate.custom}
                     value={customPaypal}
                     onChange={(e) => setCustomPaypal(e.target.value)}
                     className="w-28 pl-7 pr-3 py-2.5 rounded-xl text-sm font-medium text-center outline-none transition-all duration-200 focus:ring-2 focus:ring-brand-blue/30"
@@ -184,10 +186,10 @@ export function DonateSection() {
                 }}
               >
                 <Coffee size={17} />
-                Buy a ${effectivePaypal} coffee via PayPal
+                {t.donate.buyViaPaypal.replace('${amount}', String(effectivePaypal))}
               </a>
               <p className="mt-4 text-[12px]" style={{ color: 'var(--text-muted)' }}>
-                You'll be redirected to PayPal to complete.
+                {t.donate.paypalRedirect}
               </p>
             </div>
           )}
@@ -216,13 +218,13 @@ export function DonateSection() {
 
               {/* Custom amount input */}
               <div className="flex items-center gap-2 justify-center mb-5">
-                <span className="text-sm" style={{ color: 'var(--text-tertiary)' }}>or</span>
+                <span className="text-sm" style={{ color: 'var(--text-tertiary)' }}>{t.donate.or}</span>
                 <div className="relative">
                   <input
                     type="number"
                     min="1000"
                     step="1000"
-                    placeholder="Custom (VND)"
+                    placeholder={`${t.donate.custom} (VND)`}
                     value={customVnd}
                     onChange={(e) => setCustomVnd(e.target.value)}
                     className="w-36 px-3 py-2.5 rounded-xl text-sm font-medium text-center outline-none transition-all duration-200 focus:ring-2 focus:ring-brand-green/30"
@@ -258,10 +260,10 @@ export function DonateSection() {
                 </div>
               )}
               <p className="text-[13px] font-medium" style={{ color: 'var(--text-secondary)' }}>
-                Scan QR code with your banking app
+                {t.donate.scanQr}
               </p>
               <p className="mt-1 text-[12px]" style={{ color: 'var(--text-muted)' }}>
-                Amount & transfer note are pre-filled automatically.
+                {t.donate.qrAutoFill}
               </p>
             </div>
           )}
