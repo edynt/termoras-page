@@ -1,4 +1,8 @@
+import { useLanguage } from '../context/language-context'
+
 export function Footer() {
+  const { t } = useLanguage()
+
   return (
     <footer className="py-10 text-center">
       <div className="section-separator mb-10" />
@@ -10,10 +14,10 @@ export function Footer() {
           </span>
         </div>
         <p className="text-[13px] mb-4" style={{ color: 'var(--text-muted)' }}>
-          A native terminal manager for developers.
+          {t.footer.tagline}
         </p>
         <p className="text-[12px] mt-6" style={{ color: 'var(--text-muted)' }}>
-          &copy; 2026 Termoras. Built with Tauri + React + Rust.
+          {t.footer.copy}
         </p>
       </div>
     </footer>

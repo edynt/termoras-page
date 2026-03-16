@@ -1,22 +1,25 @@
 import type { ReactNode } from 'react'
+import { useLanguage } from '../context/language-context'
 
 export function Showcase() {
+  const { t } = useLanguage()
+
   return (
     <section className="py-20 pb-28 relative" id="showcase">
       <div className="section-separator" />
 
       <div className="max-w-[1120px] mx-auto px-6 pt-20">
         <p className="fade-up text-center text-[13px] font-semibold uppercase tracking-[3px] text-brand-blue mb-4">
-          Showcase
+          {t.showcase.label}
         </p>
         <h2 className="fade-up text-center text-[clamp(28px,4vw,44px)] font-extrabold tracking-tight mb-4">
-          Built for your <span className="gradient-text">daily workflow</span>
+          {t.showcase.title} <span className="gradient-text">{t.showcase.titleHighlight}</span>
         </h2>
         <p
           className="fade-up text-center text-base max-w-[480px] mx-auto mb-16"
           style={{ color: 'var(--text-secondary)' }}
         >
-          From terminal to task management to version control — all in one window.
+          {t.showcase.subtitle}
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -48,9 +51,9 @@ export function Showcase() {
               className="px-6 pb-6 pt-5"
               style={{ borderTop: '1px solid var(--border-secondary)' }}
             >
-              <h3 className="text-base font-bold mb-1.5">Kanban Board</h3>
+              <h3 className="text-base font-bold mb-1.5">{t.showcase.kanban.title}</h3>
               <p className="text-[13px] leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                Drag-and-drop task management with custom tags, auto-run commands, and one-click execution. Plan and ship features alongside your terminal.
+                {t.showcase.kanban.description}
               </p>
             </div>
           </div>
@@ -82,9 +85,9 @@ export function Showcase() {
               className="px-6 pb-6 pt-5"
               style={{ borderTop: '1px solid var(--border-secondary)' }}
             >
-              <h3 className="text-base font-bold mb-1.5">Diff Viewer</h3>
+              <h3 className="text-base font-bold mb-1.5">{t.showcase.diff.title}</h3>
               <p className="text-[13px] leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                Review file changes with syntax highlighting, line numbers, and split or unified view modes. Stage, commit, and push without leaving the app.
+                {t.showcase.diff.description}
               </p>
             </div>
           </div>

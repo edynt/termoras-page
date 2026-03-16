@@ -1,9 +1,12 @@
 import { Download } from 'lucide-react'
 import { AppPreview } from './app-preview'
 import { useLatestRelease } from '../hooks/use-latest-release'
+import { useLanguage } from '../context/language-context'
 
 export function Hero() {
   const { version, aarch64DmgUrl, x64DmgUrl } = useLatestRelease()
+  const { t } = useLanguage()
+
   return (
     <section className="relative pt-44 pb-24 text-center max-md:pt-32 max-md:pb-16 overflow-hidden">
       {/* Ambient orbs */}
@@ -30,14 +33,14 @@ export function Hero() {
           }}
         >
           <span className="w-2 h-2 rounded-full bg-brand-green animate-pulse-dot" />
-          v{version} — Now available for macOS
+          v{version} {t.hero.badgeSuffix}
         </div>
 
         {/* Heading */}
         <h1 className="fade-up text-[clamp(44px,6.5vw,76px)] font-extrabold tracking-[-0.03em] leading-[1.05] mb-6">
-          Your terminals,
+          {t.hero.headingLine1}
           <br />
-          <span className="gradient-text">organized.</span>
+          <span className="gradient-text">{t.hero.headingHighlight}</span>
         </h1>
 
         {/* Subtitle */}
@@ -45,8 +48,7 @@ export function Hero() {
           className="fade-up text-lg max-w-[520px] mx-auto mb-10 leading-relaxed"
           style={{ color: 'var(--text-secondary)' }}
         >
-          A native desktop app that organizes your terminals by project — with
-          built-in task boards, Git integration, and command automation.
+          {t.hero.subtitle}
         </p>
 
         {/* CTA */}
@@ -57,7 +59,7 @@ export function Hero() {
             style={{ boxShadow: '0 4px 24px rgba(107,161,241,0.3), 0 1px 3px rgba(0,0,0,0.1)' }}
           >
             <Download size={17} />
-            macOS Apple Silicon
+            {t.hero.downloadAppleSilicon}
           </a>
           <a
             href={x64DmgUrl}
@@ -71,13 +73,13 @@ export function Hero() {
             }}
           >
             <Download size={17} style={{ opacity: 0.5 }} />
-            macOS Intel
+            {t.hero.downloadIntel}
           </a>
         </div>
 
         {/* Meta */}
         <p className="fade-up mt-5 text-[13px]" style={{ color: 'var(--text-tertiary)' }}>
-          v{version} &middot; .dmg installer
+          v{version} &middot; {t.hero.metaSuffix}
         </p>
 
         <AppPreview />

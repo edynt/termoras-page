@@ -1,22 +1,25 @@
 import { useState, useEffect } from 'react'
 import { ThemeToggle } from './theme-toggle'
+import { LanguageToggle } from './language-toggle'
+import { useLanguage } from '../context/language-context'
 
 const hasDonate = !!import.meta.env.VITE_PAYPAL_ME_USERNAME ||
   (!!import.meta.env.VITE_VIETQR_BANK_BIN && !!import.meta.env.VITE_VIETQR_ACCOUNT_NO)
 
-const NAV_ITEMS: { label: string; hash: string; isPage?: boolean }[] = [
-  { label: 'Features', hash: 'features' },
-  { label: 'Showcase', hash: 'showcase' },
-  { label: 'Tech', hash: 'tech' },
-  { label: 'Feedback', hash: 'feedback' },
-]
-if (hasDonate) {
-  NAV_ITEMS.push({ label: 'Buy a coffee', hash: 'donate' })
-  NAV_ITEMS.push({ label: 'Donors', hash: 'donors', isPage: true })
-}
-
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false)
+  const { t } = useLanguage()
+
+  const navItems: { label: string; hash: string; isPage?: boolean }[] = [
+    { label: t.nav.features, hash: 'features' },
+    { label: t.nav.showcase, hash: 'showcase' },
+    { label: t.nav.tech, hash: 'tech' },
+    { label: t.nav.feedback, hash: 'feedback' },
+  ]
+  if (hasDonate) {
+    navItems.push({ label: t.nav.buyACoffee, hash: 'donate' })
+    navItems.push({ label: t.nav.donors, hash: 'donors', isPage: true })
+  }
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
@@ -54,7 +57,7 @@ export function Navbar() {
         </a>
 
         <div className="hidden md:flex items-center gap-1">
-          {NAV_ITEMS.map((item) => (
+          {navItems.map((item) => (
             <a
               key={item.hash}
               href={`#${item.hash}`}
@@ -73,6 +76,7 @@ export function Navbar() {
 
           <div className="w-px h-5 mx-2" style={{ background: 'var(--border-primary)' }} />
 
+          <LanguageToggle />
           <ThemeToggle />
 
           <a
@@ -80,19 +84,20 @@ export function Navbar() {
             className="ml-2 px-5 py-2 rounded-lg text-[13px] font-semibold bg-gradient-to-br from-brand-blue to-brand-green text-[#0a0b0f] transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 btn-press"
             style={{ boxShadow: '0 2px 12px rgba(107,161,241,0.2)' }}
           >
-            Download
+            {t.nav.download}
           </a>
         </div>
 
         {/* Mobile */}
         <div className="flex md:hidden items-center gap-3">
+          <LanguageToggle />
           <ThemeToggle />
           <a
             href="#download"
             className="px-4 py-2 rounded-lg text-[13px] font-semibold bg-gradient-to-br from-brand-blue to-brand-green text-[#0a0b0f] transition-all duration-200 btn-press"
             style={{ boxShadow: '0 2px 12px rgba(107,161,241,0.2)' }}
           >
-            Download
+            {t.nav.download}
           </a>
         </div>
       </div>

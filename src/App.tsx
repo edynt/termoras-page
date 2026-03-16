@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Navbar } from './components/navbar'
 import { Hero } from './components/hero'
+import { About } from './components/about'
 import { Features } from './components/features'
 import { Showcase } from './components/showcase'
 import { TechStack } from './components/tech-stack'
@@ -30,6 +31,7 @@ function LandingPage() {
     <>
       <Navbar />
       <Hero />
+      <About />
       <Features />
       <Showcase />
       <TechStack />

@@ -1,10 +1,12 @@
 import { useState, useRef, useEffect } from 'react'
 import { MessageSquarePlus, X, Send, Star, CheckCircle, AlertCircle } from 'lucide-react'
 import { submitFeedback } from '../lib/supabase'
+import { useLanguage } from '../context/language-context'
 
 type Status = 'idle' | 'submitting' | 'success' | 'error'
 
 export function FeedbackWidget() {
+  const { t } = useLanguage()
   const [open, setOpen] = useState(false)
   const [status, setStatus] = useState<Status>('idle')
   const [name, setName] = useState('')
@@ -51,7 +53,6 @@ export function FeedbackWidget() {
 
   function handleClose() {
     setOpen(false)
-    // Reset after animation
     setTimeout(reset, 200)
   }
 
@@ -82,25 +83,26 @@ export function FeedbackWidget() {
 
   return (
     <>
-      {/* Floating button */}
+      {/* Floating button with text label */}
       <button
         ref={toggleRef}
         onClick={() => {
           if (!open) reset()
           setOpen(!open)
         }}
-        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full flex items-center justify-center bg-gradient-to-br from-brand-blue to-brand-green text-[#0a0b0f] transition-all duration-300 hover:scale-110 hover:-translate-y-0.5 btn-press cursor-pointer"
+        className="fixed bottom-6 right-6 z-50 flex items-center gap-2.5 px-5 py-3 rounded-full bg-gradient-to-br from-brand-blue to-brand-green text-[#0a0b0f] text-sm font-bold transition-all duration-300 hover:scale-105 hover:-translate-y-0.5 btn-press cursor-pointer"
         style={{
           boxShadow: '0 4px 24px rgba(107,161,241,0.35), 0 2px 8px rgba(0,0,0,0.15)',
         }}
         aria-label={open ? 'Close feedback form' : 'Send feedback'}
       >
-        {open ? <X size={22} /> : <MessageSquarePlus size={22} />}
+        {open ? <X size={18} /> : <MessageSquarePlus size={18} />}
+        <span>{t.feedback.btnLabel}</span>
       </button>
 
       {/* Modal */}
       <div
-        className="fixed bottom-24 right-6 z-50 transition-all duration-200 origin-bottom-right"
+        className="fixed bottom-20 right-6 z-50 transition-all duration-200 origin-bottom-right"
         style={{
           opacity: open ? 1 : 0,
           transform: open ? 'scale(1) translateY(0)' : 'scale(0.9) translateY(8px)',
@@ -128,10 +130,10 @@ export function FeedbackWidget() {
           >
             <div>
               <h3 id="feedback-title" className="text-sm font-bold" style={{ color: 'var(--text-primary)' }}>
-                Send Feedback
+                {t.feedback.title}
               </h3>
               <p className="text-xs mt-0.5" style={{ color: 'var(--text-tertiary)' }}>
-                Help us improve Termoras
+                {t.feedback.subtitle}
               </p>
             </div>
             <button
@@ -150,10 +152,10 @@ export function FeedbackWidget() {
               <div className="flex flex-col items-center py-6 gap-3">
                 <CheckCircle size={40} className="text-brand-green" />
                 <p className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>
-                  Thank you!
+                  {t.feedback.thankYou}
                 </p>
                 <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>
-                  Your feedback has been submitted.
+                  {t.feedback.submitted}
                 </p>
               </div>
             ) : (
@@ -164,13 +166,13 @@ export function FeedbackWidget() {
                     className="block text-xs font-semibold mb-1.5"
                     style={{ color: 'var(--text-secondary)' }}
                   >
-                    Name
+                    {t.feedback.nameLabel}
                   </label>
                   <input
                     type="text"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    placeholder="Your name"
+                    placeholder={t.feedback.namePlaceholder}
                     required
                     maxLength={100}
                     className="w-full px-3.5 py-2.5 rounded-xl text-sm outline-none transition-all duration-200 placeholder:text-[var(--text-muted)]"
@@ -196,7 +198,7 @@ export function FeedbackWidget() {
                     className="block text-xs font-semibold mb-1.5"
                     style={{ color: 'var(--text-secondary)' }}
                   >
-                    Rating
+                    {t.feedback.ratingLabel}
                   </label>
                   <div className="flex gap-1" role="group" aria-label="Star rating">
                     {[1, 2, 3, 4, 5].map((star) => (
@@ -227,12 +229,12 @@ export function FeedbackWidget() {
                     className="block text-xs font-semibold mb-1.5"
                     style={{ color: 'var(--text-secondary)' }}
                   >
-                    Message
+                    {t.feedback.messageLabel}
                   </label>
                   <textarea
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
-                    placeholder="What's on your mind?"
+                    placeholder={t.feedback.messagePlaceholder}
                     required
                     rows={3}
                     maxLength={1000}
@@ -290,12 +292,12 @@ export function FeedbackWidget() {
                       <span
                         className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin"
                       />
-                      Sending...
+                      {t.feedback.sending}
                     </>
                   ) : (
                     <>
                       <Send size={15} />
-                      Send Feedback
+                      {t.feedback.send}
                     </>
                   )}
                 </button>

@@ -1,3 +1,5 @@
+import { useLanguage } from '../context/language-context'
+
 const techItems = [
   { label: 'Tauri v2', icon: 'T', color: '#f0c46f' },
   { label: 'React 19', icon: '\u269B', color: '#61dafb' },
@@ -8,22 +10,24 @@ const techItems = [
 ]
 
 export function TechStack() {
+  const { t } = useLanguage()
+
   return (
     <section className="py-20 pb-28 relative" id="tech">
       <div className="section-separator" />
 
       <div className="max-w-[1120px] mx-auto px-6 pt-20">
         <p className="fade-up text-center text-[13px] font-semibold uppercase tracking-[3px] text-brand-blue mb-4">
-          Built With
+          {t.tech.label}
         </p>
         <h2 className="fade-up text-center text-[clamp(28px,4vw,44px)] font-extrabold tracking-tight mb-4">
-          Modern tech, native feel
+          {t.tech.title}
         </h2>
         <p
           className="fade-up text-center text-base max-w-[480px] mx-auto mb-14"
           style={{ color: 'var(--text-secondary)' }}
         >
-          Powered by the best tools in the ecosystem for performance and developer experience.
+          {t.tech.subtitle}
         </p>
 
         <div className="fade-up flex gap-6 justify-center flex-wrap">
