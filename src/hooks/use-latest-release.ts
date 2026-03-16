@@ -6,12 +6,12 @@ const RELEASE_API_URL = '/api/latest-release'
 
 // Hardcoded fallback — always shows working links even if API fails
 const FALLBACK = {
-  version: '0.1.1',
-  tagName: 'v0.1.1',
-  aarch64DmgUrl: 'https://github.com/edynt/termoras/releases/download/v0.1.1/Termoras_0.1.1_aarch64.dmg',
-  x64DmgUrl: 'https://github.com/edynt/termoras/releases/download/v0.1.1/Termoras_0.1.1_x64.dmg',
-  amd64DebUrl: 'https://github.com/edynt/termoras/releases/download/v0.1.1/Termoras_0.1.1_amd64.deb',
-  windowsX64Url: 'https://github.com/edynt/termoras/releases/download/v0.1.1/Termoras_0.1.1_x64-setup.exe',
+  version: '0.0.1',
+  tagName: 'v0.0.1',
+  aarch64DmgUrl: 'https://github.com/edynt/termoras/releases/download/v0.0.1/Termoras_0.0.1_aarch64.dmg',
+  x64DmgUrl: 'https://github.com/edynt/termoras/releases/download/v0.0.1/Termoras_0.0.1_x64.dmg',
+  amd64DebUrl: 'https://github.com/edynt/termoras/releases/download/v0.0.1/Termoras_0.0.1_amd64.deb',
+  windowsX64Url: 'https://github.com/edynt/termoras/releases/download/v0.0.1/Termoras_0.0.1_x64-setup.exe',
 }
 
 interface ReleaseInfo {
