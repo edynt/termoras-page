@@ -21,6 +21,7 @@ export const translations = {
       downloadAppleSilicon: 'macOS Apple Silicon',
       downloadIntel: 'macOS Intel',
       metaSuffix: '.dmg installer',
+      trustLine: 'Free forever. No sign-up. Fully offline. Your code stays on your machine.',
     },
 
     // About / Description
@@ -115,6 +116,9 @@ export const translations = {
       intel: 'macOS Intel',
       dmg: '.dmg installer',
       macOnly: 'macOS only',
+      trustNoData: 'No data collection',
+      trustOffline: 'Works offline',
+      trustNoAccount: 'No account needed',
     },
 
     // Footer
@@ -211,6 +215,7 @@ export const translations = {
       downloadAppleSilicon: 'macOS Apple Silicon',
       downloadIntel: 'macOS Intel',
       metaSuffix: 'Bộ cài .dmg',
+      trustLine: 'Miễn phí mãi mãi. Không cần đăng ký. Hoàn toàn offline. Code của bạn luôn nằm trên máy bạn.',
     },
 
     // About / Description
@@ -305,6 +310,9 @@ export const translations = {
       intel: 'macOS Intel',
       dmg: 'Bộ cài .dmg',
       macOnly: 'Chỉ macOS',
+      trustNoData: 'Không thu thập dữ liệu',
+      trustOffline: 'Hoạt động offline',
+      trustNoAccount: 'Không cần tài khoản',
     },
 
     // Footer

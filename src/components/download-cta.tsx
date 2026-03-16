@@ -1,4 +1,4 @@
-import { Download, HardDrive, Activity } from 'lucide-react'
+import { Download, HardDrive, Activity, ShieldCheck, WifiOff, UserX } from 'lucide-react'
 import { useLatestRelease } from '../hooks/use-latest-release'
 import { useLanguage } from '../context/language-context'
 
@@ -75,6 +75,25 @@ export function DownloadCta() {
               <span className="flex items-center gap-1.5">
                 <Activity size={14} />
                 {t.downloadCta.macOnly}
+              </span>
+            </div>
+
+            {/* Trust badges */}
+            <div
+              className="flex gap-5 justify-center mt-5 text-[13px] flex-wrap"
+              style={{ color: 'var(--text-secondary)' }}
+            >
+              <span className="flex items-center gap-1.5">
+                <ShieldCheck size={14} className="text-brand-green" />
+                {t.downloadCta.trustNoData}
+              </span>
+              <span className="flex items-center gap-1.5">
+                <WifiOff size={14} className="text-brand-blue" />
+                {t.downloadCta.trustOffline}
+              </span>
+              <span className="flex items-center gap-1.5">
+                <UserX size={14} className="text-brand-purple" />
+                {t.downloadCta.trustNoAccount}
               </span>
             </div>
           </div>

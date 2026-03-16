@@ -77,8 +77,16 @@ export function Hero() {
           </a>
         </div>
 
+        {/* Trust line */}
+        <p
+          className="fade-up mt-6 text-[13px] font-medium tracking-wide"
+          style={{ color: 'var(--text-tertiary)' }}
+        >
+          {t.hero.trustLine}
+        </p>
+
         {/* Meta */}
-        <p className="fade-up mt-5 text-[13px]" style={{ color: 'var(--text-tertiary)' }}>
+        <p className="fade-up mt-3 text-[13px]" style={{ color: 'var(--text-tertiary)' }}>
           v{version} &middot; {t.hero.metaSuffix}
         </p>
 
